@@ -1557,8 +1557,8 @@ angular.module('izhukov.utils', [])
       options = options || {}
 
       var entities = options.entities
-      var contextSite = options.contextSite || 'Telegram'
-      var contextExternal = contextSite != 'Telegram'
+      var contextSite = options.contextSite || 'Privalino'
+      var contextExternal = contextSite != 'Privalino'
       var emojiFound = false
 
       if (entities === undefined) {

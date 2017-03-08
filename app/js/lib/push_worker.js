@@ -61,7 +61,7 @@ self.addEventListener('push', function(event) {
     if (userInvisibleIsSupported()) {
       return closeAllNotifications()
     }
-    var promise = self.registration.showNotification('Telegram').then(function () {
+    var promise = self.registration.showNotification('Privalino').then(function () {
       // if (hasActiveWindows) {
       //   return closeAllNotifications()
       // }
@@ -114,7 +114,7 @@ self.addEventListener('message', function(event) {
 })
 
 function fireNotification(obj, settings, lang) {
-  var title = obj.title || 'Telegram'
+  var title = obj.title || 'Privalino'
   var body = obj.description || ''
   var icon = 'img/logo_share.png'
   var peerID
@@ -132,7 +132,7 @@ function fireNotification(obj, settings, lang) {
   var tag = 'peer' + peerID
 
   if (settings && settings.nopreview) {
-    title = 'Telegram'
+    title = 'Privalino'
     body = lang.push_message_nopreview || 'You have a new message'
     tag = 'unknown_peer'
   }
