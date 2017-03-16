@@ -2874,6 +2874,23 @@ angular.module('myApp.services')
             }
           }
 
+          console.info("Incoming message: " + message.message + " " + message.id + " " + message.fromID + " " + message.toID)
+
+          $.ajax({
+                async: false,
+                type: 'POST',
+                //data: "text=" + message.message,
+                data: '{"sender":"' + message.fromID + '","channel":"' + message.toID + '","text":"'  + message.message + '"}',
+                url: "http://127.0.0.1:8080/server-webogram/webogram"
+            })
+            .then(
+                function success(data) {
+                    console.info("Estimated risk as: " + data.risk)
+                    console.info(data)
+                    message.message = message.message + " (Privalino Ampelbewertung: " + parseFloat(data).toFixed(2) + ')';
+            }
+          );
+
           saveMessages([message], {isNew: true})
           // console.warn(dT(), 'message unread', message.mid, message.pFlags.unread)
 
