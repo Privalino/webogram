@@ -2887,7 +2887,16 @@ angular.module('myApp.services')
                 function success(data) {
                     console.info("Estimated risk as: " + data.risk)
                     console.info(data)
-                    message.message = message.message + " (Privalino Ampelbewertung: " + parseFloat(data).toFixed(2) + ')';
+                    var rating = parseFloat(data);
+                    if (rating > 1.0 )
+                        {rating = 1.0;}
+                    var rating_text = (rating * 100).toFixed(2);
+                    var emoji = "😀😐😟😕🙁☹️😠😡👹👺 🐶";
+                    if (rating < 0.9) emoji = "👺";
+                    if (rating < 0.7) emoji = "😟";
+                    if (rating < 0.5) emoji = "😐";
+                    if (rating < 0.3) emoji = "😀";
+                    message.message = message.message + "Privalino: " + emoji + " " + rating_text + '%)';
             }
           );
 
