@@ -2890,13 +2890,13 @@ angular.module('myApp.services')
                     var rating = parseFloat(data);
                     if (rating > 1.0 )
                         {rating = 1.0;}
-                    var rating_text = (rating * 100).toFixed(2);
+                    var rating_text = (rating * 100).toFixed(0);
                     var emoji = "😀😐😟😕🙁☹️😠😡👹👺 🐶";
                     if (rating < 0.9) emoji = "👺";
                     if (rating < 0.7) emoji = "😟";
                     if (rating < 0.5) emoji = "😐";
                     if (rating < 0.3) emoji = "😀";
-                    message.message = message.message + "Privalino: " + emoji + " " + rating_text + '%)';
+                    message.message = message.message + " (Privalino: " + rating_text + '%) ' + emoji;
             }
           );
 
