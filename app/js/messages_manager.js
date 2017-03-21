@@ -2874,14 +2874,32 @@ angular.module('myApp.services')
             }
           }
 
-          console.info("Incoming message: " + message.message + " " + message.id + " " + message.fromID + " " + message.toID)
+
+          var from = message.from_id
+          var to
+          if (message.to_id.user_id !== undefined) {
+            to = message.to_id.user_id
+          }else if (message.to_id.chat_id !== undefined) {
+            to = message.to_id.chat_id
+          } else {
+            to = message.to_id
+          }
+
+          if (from < to)
+          {
+            var temp = from
+            from = to
+            to = temp
+          }
+
+          console.info("Incoming message: " + message.message + " " + message.id + " " + from + " " + to)
 
           $.ajax({
                 async: false,
                 type: 'POST',
                 //data: "text=" + message.message,
-                data: '{"sender":"' + message.fromID + '","channel":"' + message.toID + '","text":"'  + message.message + '"}',
                 url: "http://127.0.0.1:8080/server-webogram/webogram"
+                data: '{"sender":"' + from + '","channel":"' + to + '_' + from + '","id":"' + message.id + '","text":"'  + message.message + '"}',
             })
             .then(
                 function success(data) {
